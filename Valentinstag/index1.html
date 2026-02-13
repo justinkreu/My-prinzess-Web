@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Für Meine Prinzessin❤️</title>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #fff; /* heller Hintergrund */
+    display: flex;
+    justify-content: center;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
+#app {
+    width: 390px;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: url("hintergrund.jpg") no-repeat center center;
+    background-size: cover;
+    text-align: center;
+    animation: appFadeIn 0.6s ease-out;
+}
+
+@keyframes appFadeIn {
+    from { opacity:0; transform:scale(1.05); }
+    to { opacity:1; transform:scale(1); }
+}
+
+/* LOGIN */
+#loginScreen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#loginScreen h2 {
+    color: #333; /* dunkel für hellen Hintergrund */
+    font-size: 2em;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 14px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    margin: 10px;
+    font-size: 1em;
+    width: 70%;
+    text-align: center;
+}
+
+.loginBtn {
+    padding: 14px 25px;
+    border-radius: 25px;
+    border: none;
+    background-color: #ff4d6d;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* MAIN */
+#mainContent {
+    display: none;
+    padding: 30px 15px;
+}
+
+#mainContent h1 {
+    font-size: 2em;
+    color: #333; /* dunkel für hellen Hintergrund */
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+}
+
+.photo {
+    width: 80%;
+    max-width: 280px;
+    border-radius: 20px;
+    border: 4px solid #ff4d6d;
+    box-shadow: 0 0 20px rgba(255,77,109,0.5);
+    margin-top: 15px;
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 1em;
+    border-radius: 25px;
+    border: none;
+    margin: 10px;
+    transition: transform 0.1s ease;
+}
+
+button:active {
+    transform: scale(0.93);
+}
+
+button.yes {
+    background: linear-gradient(145deg, #ff4d6d, #ff1f4b);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255,77,109,0.7);
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+button.no {
+    background: #eee;
+    color: #333;
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.05em;
+}
+
+/* MESSAGE */
+#message {
+    margin-top: 25px;
+    font-size: 1.4em;
+    display: none;
+    color: #333; /* dunkel für hellen Hintergrund */
+    font-weight: 600;
+    line-height: 1.6em;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.6);
+    padding: 20px;
+    border-radius: 25px;
+    font-family: 'Cursive', 'Comic Sans MS', sans-serif;
+    letter-spacing: 0.5px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    backdrop-filter: blur(3px);
+}
+
+/* Herzregen */
+.heart {
+    position: absolute;
+    top: -10px;
+    font-size: 24px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh); opacity:0; }
+}
+
+/* Explosion */
+.explosion-heart {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 28px;
+    pointer-events: none;
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+    0% { transform:translate(-50%,-50%) scale(0.5); opacity:1; }
+    100% { transform:translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1.5); opacity:0; }
+}
+
+/* Shake */
+@keyframes shake {
+    0%{transform:translate(0,0);}
+    25%{transform:translate(-4px,4px);}
+    50%{transform:translate(4px,-4px);}
+    75%{transform:translate(-4px,4px);}
+    100%{transform:translate(0,0);}
+}
+.shake { animation:shake 0.4s; }
+
+.buttons {
+    margin-top: 30px;
+    position: relative;
+    height: 200px;
+}
+</style>
+</head>
+
+<body>
+<div id="app">
+
+<div id="loginScreen">
+    <h2>MEINE PRINZESSIN💕</h2>
+    <input type="password" id="passwordInput" placeholder="Passwort">
+    <button class="loginBtn" onclick="checkPassword()">Öffnen ❤️</button>
+    <p id="error" style="color:#333;"></p>
+</div>
+
+<div id="mainContent">
+    <h1>Elina, möchtest du mein Valentin sein? 💘</h1>
+    <img src="foto.jpg" class="photo">
+
+    <div class="buttons">
+        <button class="yes" onclick="sayYes()">Ja ❤️</button>
+        <button class="no" id="noBtn">Nein 😢</button>
+    </div>
+
+    <div id="message">
+        Du bist mein kleiner Schatz, meine Prinzessin, und ich werde immer für dich da sein 💕🌸 
+        Ich liebe dich unendlich 💕
+    </div>
+</div>
+
+</div>
+
+<script>
+const correctPassword="elina123";
+let firstNoClick=true;
+
+/* App Lock */
+document.addEventListener("contextmenu",e=>e.preventDefault());
+document.addEventListener("touchmove",e=>e.preventDefault(),{passive:false});
+
+/* Unlock */
+function checkPassword(){
+ if(document.getElementById("passwordInput").value===correctPassword){
+   const login=document.getElementById("loginScreen");
+   login.style.transition="opacity 0.5s";
+   login.style.opacity="0";
+   setTimeout(()=>{
+     login.style.display="none";
+     document.getElementById("mainContent").style.display="block";
+   },500);
+ } else {
+   if(navigator.vibrate) navigator.vibrate(200);
+   document.getElementById("error").innerText="Falsches Passwort 💔";
+ }
+}
+
+/* YES */
+function sayYes(){
+ document.getElementById("message").style.display="block";
+
+ if(navigator.vibrate)
+   navigator.vibrate([200,100,200,100,400]);
+
+ document.body.classList.add("shake");
+ setTimeout(()=>document.body.classList.remove("shake"),400);
+
+ heartExplosion();
+ startHeartRain();
+}
+
+/* NO */
+const noBtn=document.getElementById("noBtn");
+const noTexts=[
+ "Nein ist keine Option 😜",
+ "Es gibt nur Ja ❤️",
+ "Falscher Button 😏",
+ "Du willst doch Ja drücken 😌"
+];
+let textIndex=0;
+
+noBtn.addEventListener("touchstart",handleNoClick);
+noBtn.addEventListener("mouseover",handleNoClick);
+
+function handleNoClick(){
+ moveButton();
+}
+
+function moveButton(){
+ const x=Math.random()*(350-120);
+ const y=Math.random()*150;
+ noBtn.style.left=x+"px";
+ noBtn.style.top=y+"px";
+ noBtn.innerText=noTexts[textIndex];
+ textIndex=(textIndex+1)%noTexts.length;
+}
+
+/* Herzregen */
+function startHeartRain(){
+ for(let i=0;i<30;i++){
+  const heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerText="💖";
+  heart.style.left=Math.random()*100+"%";
+  heart.style.animationDuration=(Math.random()*2+3)+"s";
+  document.getElementById("app").appendChild(heart);
+  setTimeout(()=>heart.remove(),5000);
+ }
+}
+
+/* Explosion */
+function heartExplosion(){
+ for(let i=0;i<40;i++){
+  const heart=document.createElement("div");
+  heart.classList.add("explosion-heart");
+  heart.innerText="💖";
+  const randomX=(Math.random()-0.5)*400+"px";
+  const randomY=(Math.random()-0.5)*400+"px";
+  heart.style.setProperty("--x",randomX);
+  heart.style.setProperty("--y",randomY);
+  document.getElementById("app").appendChild(heart);
+  setTimeout(()=>heart.remove(),1000);
+ }
+}
+</script>
+</body>
+</html>
