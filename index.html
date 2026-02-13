@@ -2,280 +2,96 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="mobile-web-app-capable" content="yes">
-<title>Für Meine Prinzessin❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Für Meine Prinzessin ❤️</title>
 
 <style>
-html, body {
+body {
     margin: 0;
-    padding: 0;
-    height: 100%;
-    background: #fff;
-    display: flex;
-    justify-content: center;
-    touch-action: manipulation;
-    -webkit-user-select: none;
-    user-select: none;
-    -webkit-touch-callout: none;
-}
-
-#app {
-    width: 100%;
-    max-width: 500px;
-    height: 100vh;       /* FIX */
-    min-height: 100vh;   /* FIX */
-    position: relative;
-    overflow: hidden;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    background: url("hintergrund.jpg") no-repeat center center;
-    background-size: cover;
+    font-family: Arial, sans-serif;
     text-align: center;
-    animation: appFadeIn 0.6s ease-out;
+    background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
 }
 
-@keyframes appFadeIn {
-    from { opacity:0; transform:scale(1.05); }
-    to { opacity:1; transform:scale(1); }
-}
-
-/* LOGIN */
-#loginScreen {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.95);
+#loginScreen, #mainContent {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-#loginScreen h2 {
-    color: #333;
-    font-size: clamp(1.4rem, 4vw, 2rem);
-    margin-bottom: 20px;
+#mainContent {
+    display: none;
+}
+
+h1, h2 {
+    font-size: 6vw;
 }
 
 input {
-    padding: 12px;
-    border-radius: 25px;
+    padding: 10px;
+    font-size: 4vw;
+    border-radius: 20px;
     border: 1px solid #ccc;
-    margin: 8px;
-    font-size: clamp(0.9rem, 3.5vw, 1rem);
-    width: 70%;
+    margin: 10px;
+    width: 60%;
     text-align: center;
 }
 
-.loginBtn {
-    padding: 12px 20px;
-    border-radius: 25px;
+button {
+    padding: 10px 20px;
+    font-size: 4vw;
+    border-radius: 20px;
     border: none;
-    background-color: #ff4d6d;
-    color: #fff;
-    font-weight: bold;
-    font-size: clamp(0.9rem, 3.5vw, 1rem);
-}
-
-/* MAIN */
-#mainContent {
-    display: none;
-    padding: 5vh 4vw;
-}
-
-#mainContent h1 {
-    font-size: clamp(1.4rem, 4.5vw, 2rem);
-    color: #333;
-    margin-bottom: 20px;
+    background: #ff4d6d;
+    color: white;
+    margin: 10px;
 }
 
 .photo {
-    width: 75%;
-    max-width: 280px;
-    height: auto;
+    width: 70%;
+    max-width: 250px;
     border-radius: 20px;
-    border: 4px solid #ff4d6d;
-    box-shadow: 0 0 20px rgba(255,77,109,0.5);
-    margin-top: 10px;
-}
-
-button {
-    padding: 2.8vw 4.5vw;
-    font-size: clamp(0.9rem, 3.5vw, 1.1rem);
-    border-radius: 25px;
-    border: none;
-    margin: 8px;
-    transition: transform 0.1s ease;
-}
-
-button:active {
-    transform: scale(0.93);
-}
-
-button.yes {
-    background: linear-gradient(145deg, #ff4d6d, #ff1f4b);
-    color: #fff;
-    box-shadow: 0 0 20px rgba(255,77,109,0.7);
-    font-weight: bold;
-}
-
-button.no {
-    background: #eee;
-    color: #333;
-    position: absolute;
-    font-weight: bold;
-}
-
-#message {
-    margin-top: 3vh;
-    font-size: clamp(1rem, 3.8vw, 1.3rem);
-    display: none;
-    color: #333;
-    font-weight: 600;
-    line-height: 1.5em;
-    background: rgba(255,255,255,0.7);
-    padding: 16px;
-    border-radius: 20px;
-    backdrop-filter: blur(3px);
-}
-
-.heart {
-    position: absolute;
-    top: -10px;
-    font-size: clamp(18px, 5vw, 24px);
-    animation: fall linear forwards;
-}
-
-@keyframes fall {
-    to { transform: translateY(110vh); opacity:0; }
-}
-
-.explosion-heart {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    font-size: clamp(20px, 6vw, 28px);
-    pointer-events: none;
-    animation: explode 1s ease-out forwards;
-}
-
-@keyframes explode {
-    0% { transform:translate(-50%,-50%) scale(0.5); opacity:1; }
-    100% { transform:translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1.3); opacity:0; }
-}
-
-@keyframes shake {
-    0%{transform:translate(0,0);}
-    25%{transform:translate(-3px,3px);}
-    50%{transform:translate(3px,-3px);}
-    75%{transform:translate(-3px,3px);}
-    100%{transform:translate(0,0);}
-}
-.shake { animation:shake 0.4s; }
-
-.buttons {
-    margin-top: 4vh;
-    position: relative;
-    height: 25vh;
+    margin: 15px 0;
 }
 </style>
 </head>
 
 <body>
-<div id="app">
 
 <div id="loginScreen">
-    <h2>MEINE PRINZESSIN💕</h2>
+    <h2>MEINE PRINZESSIN 💕</h2>
     <input type="password" id="passwordInput" placeholder="Passwort">
-    <button class="loginBtn" onclick="checkPassword()">Öffnen ❤️</button>
-    <p id="error" style="color:#333;"></p>
+    <button onclick="checkPassword()">Öffnen ❤️</button>
+    <p id="error"></p>
 </div>
 
 <div id="mainContent">
     <h1>Elina, möchtest du mein Valentin sein? 💘</h1>
     <img src="foto.jpg" class="photo">
-
-    <div class="buttons">
-        <button class="yes" onclick="sayYes()">Ja ❤️</button>
-        <button class="no" id="noBtn">Nein 😢</button>
-    </div>
-
-    <div id="message">
-        Du bist meine kleine Prinzessin, und ich werde immer für dich da sein 💕🌸 
-        Ich liebe dich 💕
-    </div>
-</div>
-
+    <button onclick="sayYes()">Ja ❤️</button>
+    <p id="message" style="display:none;font-size:5vw;">
+        Ich liebe dich über alles 💕
+    </p>
 </div>
 
 <script>
-const correctPassword="16122023";
+const correctPassword = "16122023";
 
 function checkPassword(){
- if(document.getElementById("passwordInput").value===correctPassword){
-   document.getElementById("loginScreen").style.display="none";
-   document.getElementById("mainContent").style.display="block";
- } else {
-   document.getElementById("error").innerText="Falsches Passwort 💔";
- }
+    if(document.getElementById("passwordInput").value === correctPassword){
+        document.getElementById("loginScreen").style.display="none";
+        document.getElementById("mainContent").style.display="flex";
+    } else {
+        document.getElementById("error").innerText="Falsches Passwort 💔";
+    }
 }
 
 function sayYes(){
- document.getElementById("message").style.display="block";
- document.body.classList.add("shake");
- setTimeout(()=>document.body.classList.remove("shake"),400);
- heartExplosion();
- startHeartRain();
-}
-
-const noBtn=document.getElementById("noBtn");
-const noTexts=[
- "Nein ist keine Option 😜",
- "Es gibt nur Ja ❤️",
- "Falscher Button 😏",
- "Du willst doch Ja drücken 😌"
-];
-let textIndex=0;
-
-noBtn.addEventListener("touchstart",moveButton);
-noBtn.addEventListener("mouseover",moveButton);
-
-function moveButton(){
- const x=Math.random()*60;
- const y=Math.random()*60;
- noBtn.style.left=x+"%";
- noBtn.style.top=y+"%";
- noBtn.innerText=noTexts[textIndex];
- textIndex=(textIndex+1)%noTexts.length;
-}
-
-function startHeartRain(){
- for(let i=0;i<25;i++){
-  const heart=document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerText="💖";
-  heart.style.left=Math.random()*100+"%";
-  heart.style.animationDuration=(Math.random()*2+3)+"s";
-  document.getElementById("app").appendChild(heart);
-  setTimeout(()=>heart.remove(),5000);
- }
-}
-
-function heartExplosion(){
- for(let i=0;i<35;i++){
-  const heart=document.createElement("div");
-  heart.classList.add("explosion-heart");
-  heart.innerText="💖";
-  const randomX=(Math.random()-0.5)*300+"px";
-  const randomY=(Math.random()-0.5)*300+"px";
-  heart.style.setProperty("--x",randomX);
-  heart.style.setProperty("--y",randomY);
-  document.getElementById("app").appendChild(heart);
-  setTimeout(()=>heart.remove(),1000);
- }
+    document.getElementById("message").style.display="block";
 }
 </script>
+
 </body>
 </html>
