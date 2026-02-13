@@ -44,9 +44,20 @@ button {
     font-size: 4vw;
     border-radius: 20px;
     border: none;
+    margin: 10px;
+    transition: 0.2s;
+}
+
+button.yes {
     background: #ff4d6d;
     color: white;
-    margin: 10px;
+}
+
+button.no {
+    background: #eee;
+    color: #333;
+    position: absolute;
+    font-weight: bold;
 }
 
 .photo {
@@ -54,6 +65,18 @@ button {
     max-width: 250px;
     border-radius: 20px;
     margin: 15px 0;
+}
+
+.buttons {
+    position: relative;
+    width: 80%;
+    height: 200px;
+}
+
+#message {
+    display: none;
+    font-size: 5vw;
+    margin-top: 15px;
 }
 </style>
 </head>
@@ -70,9 +93,14 @@ button {
 <div id="mainContent">
     <h1>Elina, möchtest du mein Valentin sein? 💘</h1>
     <img src="foto.jpg" class="photo">
-    <button onclick="sayYes()">Ja ❤️</button>
-    <p id="message" style="display:none;font-size:5vw;">
-        Ich liebe dich über alles 💕
+
+    <div class="buttons">
+        <button class="yes" onclick="sayYes()">Ja ❤️</button>
+        <button class="no" id="noBtn">Nein 😢</button>
+    </div>
+
+    <p id="message">
+        Du bist meine kleine Prinzessin 💕 Ich liebe dich über alles ❤️
     </p>
 </div>
 
@@ -90,6 +118,53 @@ function checkPassword(){
 
 function sayYes(){
     document.getElementById("message").style.display="block";
+}
+
+/* =========================
+   NEIN BUTTON LOGIK
+========================= */
+
+const noBtn = document.getElementById("noBtn");
+
+const noTexts = [
+ "Nein ist keine Option 😜",
+ "Es gibt nur Ja ❤️",
+ "Falscher Button 😏",
+ "Du willst doch Ja drücken 😌"
+];
+
+let textIndex = 0;
+let speedMultiplier = 1;
+
+noBtn.addEventListener("touchstart", handleNoClick);
+noBtn.addEventListener("mouseover", handleNoClick);
+
+function handleNoClick(){
+    moveButton();
+    speedMultiplier += 0.2;
+}
+
+function moveButton(){
+    const container = document.querySelector(".buttons");
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
+
+    const maxX = containerWidth - btnWidth;
+    const maxY = containerHeight - btnHeight;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    noBtn.innerText = noTexts[textIndex];
+    textIndex = (textIndex + 1) % noTexts.length;
+
+    noBtn.style.transform = "scale(" + (1 + (speedMultiplier * 0.05)) + ")";
 }
 </script>
 
