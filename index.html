@@ -6,12 +6,28 @@
 <title>Für Meine Prinzessin ❤️</title>
 
 <style>
+/* ===== BODY & HINTERGRUND ===== */
 body {
     margin: 0;
     font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
     text-align: center;
-    background: linear-gradient(to bottom, #ffe6f0, #ffb6c1);
     overflow-x: hidden;
+
+    /* Hintergrundbild einfügen */
+    background: url('hintergrund.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Overlay für bessere Lesbarkeit */
+body::before {
+    content: "";
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(255,255,255,0.3); /* halbtransparent */
+    z-index: -1;
 }
 
 /* LOGIN & MAIN */
@@ -162,13 +178,15 @@ button.no:hover {
     left:0;
     width:100%;
     height:100%;
-    background: rgba(255,230,240,0.95);
     justify-content:center;
     align-items:center;
     z-index:9999;
     font-size: 25vw;
     color: #ff4d6d;
     animation: beat 0.6s infinite alternate;
+
+    /* transparent, Hintergrundbild bleibt sichtbar */
+    background: rgba(255,255,255,0);
 }
 
 @keyframes beat {
@@ -220,7 +238,7 @@ function checkPassword(){
 
         // 3 Sekunden warten, dann Loader explodiert
         setTimeout(()=>{
-            heartExplosionLoader(); // kleine Herzen aus Loader
+            heartExplosionLoader(); // Explosion der kleinen Herzen
             loader.style.display = "none";
             document.getElementById("loginScreen").style.display = "none";
             const main = document.getElementById("mainContent");
@@ -232,7 +250,7 @@ function checkPassword(){
     }
 }
 
-/* ===== JA ANIMATION ===== */
+/* JA ANIMATION */
 function sayYes(){
     document.getElementById("noBtn").style.display="none";
     const msg = document.getElementById("message");
@@ -245,7 +263,7 @@ function sayYes(){
     startHeartRain();
 }
 
-/* ===== HERZREGEN & EXPLOSION ===== */
+/* HERZREGEN & EXPLOSION */
 function startHeartRain(){
     for(let i=0; i<25; i++){
         const heart = document.createElement("div");
@@ -272,7 +290,7 @@ function heartExplosion(){
     }
 }
 
-/* ===== LOADER HERZ EXPLOSION ===== */
+/* LOADER HERZ EXPLOSION */
 function heartExplosionLoader(){
     for(let i=0;i<60;i++){
         const heart = document.createElement("div");
@@ -287,7 +305,7 @@ function heartExplosionLoader(){
     }
 }
 
-/* ===== NEIN BUTTON ===== */
+/* NEIN BUTTON */
 const noBtn = document.getElementById("noBtn");
 const noTexts = [
  "Nein ist keine Option 😜",
