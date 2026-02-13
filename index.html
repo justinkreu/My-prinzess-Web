@@ -8,9 +8,9 @@
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
     text-align: center;
-    background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+    background: linear-gradient(to bottom, #ffe6f0, #ffb6c1);
     overflow-x: hidden;
 }
 
@@ -25,63 +25,100 @@ body {
 
 #mainContent {
     display: none;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
 h1, h2 {
     font-size: 6vw;
+    color: #ff1f4b;
+    text-shadow: 1px 1px 8px rgba(255, 77, 109, 0.5);
 }
 
+/* INPUT */
 input {
-    padding: 10px;
+    padding: 12px;
     font-size: 4vw;
-    border-radius: 20px;
-    border: 1px solid #ccc;
+    border-radius: 25px;
+    border: 2px solid #ff4d6d;
     margin: 10px;
-    width: 60%;
+    width: 65%;
     text-align: center;
+    outline: none;
+    transition: 0.3s;
 }
 
+input:focus {
+    border-color: #ff1f4b;
+    box-shadow: 0 0 15px rgba(255,31,75,0.5);
+}
+
+/* BUTTONS */
 button {
-    padding: 10px 20px;
+    padding: 12px 25px;
     font-size: 4vw;
-    border-radius: 20px;
+    border-radius: 25px;
     border: none;
     margin: 10px;
-    transition: transform 0.1s;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
 }
 
 button.yes {
-    background: #ff4d6d;
-    color: white;
+    background: linear-gradient(145deg, #ff4d6d, #ff1f4b);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(255,77,109,0.5);
+}
+
+button.yes:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255,77,109,0.7);
 }
 
 button.no {
-    background: #eee;
-    color: #333;
-    position: absolute;
+    background: #fff5f8;
+    color: #ff4d6d;
     font-weight: bold;
+    position: absolute;
 }
 
+button.no:hover {
+    transform: scale(1.05);
+}
+
+/* PHOTO */
 .photo {
     width: 70%;
     max-width: 250px;
     border-radius: 20px;
-    margin: 15px 0;
+    margin: 20px 0;
+    border: 4px solid #ff4d6d;
+    box-shadow: 0 0 20px rgba(255,77,109,0.4);
+    transition: transform 0.3s;
 }
 
+.photo:hover {
+    transform: scale(1.05);
+}
+
+/* MESSAGE */
+#message {
+    display: none;
+    font-size: 5vw;
+    margin-top: 20px;
+    color: #ff1f4b;
+    font-weight: bold;
+    text-shadow: 1px 1px 8px rgba(255,77,109,0.4);
+}
+
+/* BUTTON CONTAINER */
 .buttons {
     position: relative;
     width: 80%;
     height: 200px;
 }
 
-#message {
-    display: none;
-    font-size: 5vw;
-    margin-top: 15px;
-}
-
-/* Herzregen & Explosion */
+/* HERZREGEN & EXPLOSION */
 .heart {
     position: absolute;
     top: -10px;
@@ -107,7 +144,7 @@ button.no {
     100% { transform:translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1.3); opacity:0; }
 }
 
-/* Shake */
+/* SHAKE */
 @keyframes shake {
     0%{transform:translate(0,0);}
     25%{transform:translate(-3px,3px);}
@@ -117,7 +154,7 @@ button.no {
 }
 .shake { animation:shake 0.4s; }
 
-/* Vollbild Loader – pochendes Herz */
+/* LOADER */
 #loader {
     display: none;
     position: fixed;
@@ -125,11 +162,11 @@ button.no {
     left:0;
     width:100%;
     height:100%;
-    background: rgba(255,255,255,0.95);
+    background: rgba(255,230,240,0.95);
     justify-content:center;
     align-items:center;
     z-index:9999;
-    font-size: 20vw;
+    font-size: 25vw;
     color: #ff4d6d;
     animation: beat 0.6s infinite alternate;
 }
@@ -151,7 +188,7 @@ button.no {
     <p id="error"></p>
 </div>
 
-<!-- Loader Vollbild -->
+<!-- Vollbild Loader -->
 <div id="loader">❤️</div>
 
 <div id="mainContent">
@@ -169,34 +206,35 @@ button.no {
 </div>
 
 <script>
-/* ======= NO ZOOM ======= */
+/* NO ZOOM */
 document.addEventListener('gesturestart', e => e.preventDefault());
 document.addEventListener('dblclick', e => e.preventDefault());
 
-/* ======= LOGIN + LADER ======= */
+/* LOGIN & LOADER + EXPLOSION */
 const correctPassword = "16122023";
 
 function checkPassword(){
     if(document.getElementById("passwordInput").value === correctPassword){
         const loader = document.getElementById("loader");
-        loader.style.display = "flex"; // Loader erscheint
+        loader.style.display = "flex";
 
-        // 3 Sekunden Herz-Animation
+        // 3 Sekunden warten, dann Loader explodiert
         setTimeout(()=>{
-            loader.style.display = "none"; // Loader verschwindet
+            heartExplosionLoader(); // kleine Herzen aus Loader
+            loader.style.display = "none";
             document.getElementById("loginScreen").style.display = "none";
-            document.getElementById("mainContent").style.display = "flex";
+            const main = document.getElementById("mainContent");
+            main.style.display = "flex";
+            setTimeout(()=> main.style.opacity = 1, 50); // sanftes Fade-In
         }, 3000);
     } else {
         document.getElementById("error").innerText="Falsches Passwort 💔";
     }
 }
 
-/* ======= JA ANIMATION ======= */
+/* ===== JA ANIMATION ===== */
 function sayYes(){
-    // Nein-Button ausblenden
     document.getElementById("noBtn").style.display="none";
-
     const msg = document.getElementById("message");
     msg.style.display="block";
 
@@ -207,6 +245,7 @@ function sayYes(){
     startHeartRain();
 }
 
+/* ===== HERZREGEN & EXPLOSION ===== */
 function startHeartRain(){
     for(let i=0; i<25; i++){
         const heart = document.createElement("div");
@@ -233,7 +272,22 @@ function heartExplosion(){
     }
 }
 
-/* ======= NEIN BUTTON ======= */
+/* ===== LOADER HERZ EXPLOSION ===== */
+function heartExplosionLoader(){
+    for(let i=0;i<60;i++){
+        const heart = document.createElement("div");
+        heart.classList.add("explosion-heart");
+        heart.innerText = "💖";
+        const randomX = (Math.random()-0.5)*window.innerWidth + "px";
+        const randomY = (Math.random()-0.5)*window.innerHeight + "px";
+        heart.style.setProperty("--x", randomX);
+        heart.style.setProperty("--y", randomY);
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),1500);
+    }
+}
+
+/* ===== NEIN BUTTON ===== */
 const noBtn = document.getElementById("noBtn");
 const noTexts = [
  "Nein ist keine Option 😜",
@@ -279,6 +333,5 @@ function moveButton(){
     noBtn.style.transform = "scale(" + (1 + (speedMultiplier * 0.05)) + ")";
 }
 </script>
-
 </body>
 </html>
