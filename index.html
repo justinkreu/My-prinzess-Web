@@ -24,8 +24,10 @@ html, body {
 }
 
 #app {
-    width: 390px;
-    height: 100vh;
+    width: 100vw;
+    max-width: 430px; /* 6,7 Zoll Optimierung */
+    height: 100dvh;   /* besser für iPhone Safari */
+    margin: 0 auto;
     position: relative;
     overflow: hidden;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
