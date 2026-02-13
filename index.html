@@ -25,7 +25,8 @@ html, body {
 #app {
     width: 100%;
     max-width: 500px;
-    height: 100dvh; /* Dynamische mobile Höhe */
+    height: 100vh;       /* FIX */
+    min-height: 100vh;   /* FIX */
     position: relative;
     overflow: hidden;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -148,7 +149,7 @@ button.no {
 }
 
 @keyframes fall {
-    to { transform: translateY(110dvh); opacity:0; }
+    to { transform: translateY(110vh); opacity:0; }
 }
 
 .explosion-heart {
